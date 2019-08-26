@@ -28,5 +28,6 @@ slack.bot_api_token=xoxb-xxxxxxxxxxxxxxxxxxxxxxxx
 ### コマンド一覧
 
 ```
-
+- 時間
+- クイズ
 ```
