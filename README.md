@@ -19,7 +19,7 @@ It is licensed under [MIT](https://opensource.org/licenses/MIT).
 3.(これでmaven projectとしてEclipseに読み込まれます)  
 4.API Token for BOT をセット  
 
-src/main/java直下にcredentials.propertiesというファイルを作り、　　以下のように取得したapi tokenをセットします
+src/main/java直下にcredentials.propertiesというファイルを作り、以下のように取得したapi tokenをセットします
 
 ```
 slack.bot_api_token=xoxb-xxxxxxxxxxxxxxxxxxxxxxxx
