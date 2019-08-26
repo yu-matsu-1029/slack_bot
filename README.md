@@ -1,6 +1,6 @@
 # SlackBot
 ## 概要
-slackletを使ったSlackBot
+Slackletを使ったSlackBot
 
 ## Eclipseへのインポートと実行
 
