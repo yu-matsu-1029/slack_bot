@@ -7,7 +7,7 @@ It is licensed under [MIT](https://opensource.org/licenses/MIT).
 
 1.Select File>Import>Git - Projects from Git  
 2.Clone URI  
-3.set clone URI to https://github.com/yu-matsu-1029/slack-bot.git  
+3.set clone URI to https://github.com/yu-matsu-1029/slack_bot.git  
 4.適宜[NEXT]を押していく  
 5."Import as general project"をチェックして、"finish"　を押す
 
