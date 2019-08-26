@@ -5,18 +5,15 @@
 ## 説明
 現在時刻の表示とクイズを出題してくれるSlackBotです。
 
-## 使用方法
+## インストール
 ```
 $ git clone https://github.com/yu-matsu-1029/slack_bot
 ```
-
 src/main/java直下にcredentials.propertiesというファイルを作り、以下のように取得したapi tokenをセットします
 
 ```
-slack.bot_api_token=xoxb-xxxxxxxxxxxxxxxxxxxxxxxx
+slack.bot_api_token=xoxb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
-
-
 ### コマンド一覧
 
 ```
