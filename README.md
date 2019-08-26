@@ -28,6 +28,6 @@ slack.bot_api_token=xoxb-xxxxxxxxxxxxxxxxxxxxxxxx
 ### コマンド一覧
 
 ```
-- 時間
-- クイズ
+1.時間　　:　現在時刻の取得
+2.クイズ　:　クイズを開始
 ```
