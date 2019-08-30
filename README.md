@@ -14,6 +14,14 @@ src/main/java直下にcredentials.propertiesというファイルを作り、以
 ```
 slack.bot_api_token=xoxb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
+src/main/java直下にdbconnector.propertiesというファイルを作り、以下のように取得したurl,user,passwordをセットします
+
+```
+URL=xxxxxxxxxxxxxxxxxxxx
+USER=xxxxxxxxxxxxx
+PASSWORD=xxxxxxxxxx
+```
+
 ### コマンド一覧
 
 ```
