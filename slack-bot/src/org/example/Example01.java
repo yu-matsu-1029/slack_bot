@@ -1,11 +1,11 @@
 package org.example;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import org.riversun.slacklet.Slacklet;
@@ -13,7 +13,6 @@ import org.riversun.slacklet.SlackletRequest;
 import org.riversun.slacklet.SlackletResponse;
 import org.riversun.slacklet.SlackletService;
 import org.riversun.xternal.simpleslackapi.SlackChannel;
-
 public class Example01 {
 
 	public static void main(String[] args) throws IOException {
@@ -22,14 +21,18 @@ public class Example01 {
 
 		SlackletService slackService = new SlackletService(botToken);
 
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		String sql = "SELECT * FROM q ORDER BY RAND() LIMIT 1";
+
 		//改行
 		String br = System.getProperty("line.separator");
 
 		//-------------------------クイズ格納
-		List<String> quizlists = new ArrayList<String>();
-		quizlists.add("アメリカの首都は？" + br + "1:ワシントン" + br + "2:ニューヨーク" + br + "3:ロサンゼルス");
-		quizlists.add("私はだれ？");
-		quizlists.add("日本で一番大きい県は？" + br + "1:岩手県" + br + "2:福島県" + br + "3:長野県");
+//		List<String> quizlists = new ArrayList<String>();
+//		quizlists.add("アメリカの首都は？" + br + "1:ワシントン" + br + "2:ニューヨーク" + br + "3:ロサンゼルス");
+//		quizlists.add("私はだれ？");
+//		quizlists.add("日本で一番大きい県は？" + br + "1:岩手県" + br + "2:福島県" + br + "3:長野県");
 
 		// slackletを追加する
 		slackService.addSlacklet(new Slacklet() {
@@ -53,10 +56,19 @@ public class Example01 {
 
 					//-----------------------------------------------------------クイズ出題
 					if (mode == 1) {
-						Collections.shuffle(quizlists);
-						String quiz = quizlists.get(0);
-						resp.reply(quiz);
-						resp.reply("答えを番号で入力してください");
+//						Collections.shuffle(quizlists);
+//						String quiz = quizlists.get(0);
+//						resp.reply(quiz);
+						try {
+							PreparedStatement preparedStatement = connection.prepareStatement(sql);
+							ResultSet rs = preparedStatement.executeQuery();
+							while(rs.next()) {
+								resp.reply(rs.getString("question"));
+								resp.reply("答えを番号で入力してください");
+										}
+							}catch(Exception e) {
+		            			e.printStackTrace();
+		            			}
 						mode = 2;
 					} else if (mode == 2) {//----------------------------------------答え合わせ
 						if (content.equals("1") || content.equals("１")) {
@@ -77,15 +89,25 @@ public class Example01 {
 					} else if (mode == 3) {
 						if (content.equals("1") || content.equals("１")) {
 							resp.reply("続けます");
-							Collections.shuffle(quizlists);
-							String quiz = quizlists.get(0);
-							resp.reply(quiz);
-							resp.reply("答えを番号で入力してください");
+//							Collections.shuffle(quizlists);
+//							String quiz = quizlists.get(0);
+//							resp.reply(quiz);
+							try {
+								PreparedStatement preparedStatement = connection.prepareStatement(sql);
+								ResultSet rs = preparedStatement.executeQuery();
+								while(rs.next()) {
+									resp.reply(rs.getString("question"));
+									resp.reply("答えを番号で入力してください");
+											}
+								}catch(Exception e) {
+			            			e.printStackTrace();
+			            			}
 							mode = 2;
-						}
-						else if (content.equals("2") || content.equals("２")) {
+						} else if (content.equals("2") || content.equals("２")) {
 							mode = 0;
 							resp.reply("終わります");
+						} else {
+							resp.reply("1,2から選択してください");
 						}
 					} else if (mode == 0) {
 
@@ -100,10 +122,27 @@ public class Example01 {
 						else if (content.contentEquals("クイズ")) {
 							mode = 2;
 							resp.reply("クイズを始めます！");
-							Collections.shuffle(quizlists);
-							String quiz = quizlists.get(0);
-							resp.reply(quiz);
-							resp.reply("答えを番号で入力してください");
+
+//							Collections.shuffle(quizlists);
+//							String quiz = quizlists.get(0);
+//							resp.reply(quiz);
+
+
+
+							try {
+								PreparedStatement preparedStatement = connection.prepareStatement(sql);
+								ResultSet rs = preparedStatement.executeQuery();
+								while(rs.next()) {
+									resp.reply(rs.getString("question"));
+									resp.reply("答えを番号で入力してください");
+											}
+								}catch(Exception e) {
+			            			e.printStackTrace();
+			            			}
+
+
+
+
 						}
 					}
 				}
