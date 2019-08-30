@@ -25,14 +25,6 @@ public class Example01 {
 		Connection connection = dbConnector.getConnection();
 		String sql = "SELECT * FROM q ORDER BY RAND() LIMIT 1";
 
-		//改行
-		String br = System.getProperty("line.separator");
-
-		//-------------------------クイズ格納
-//		List<String> quizlists = new ArrayList<String>();
-//		quizlists.add("アメリカの首都は？" + br + "1:ワシントン" + br + "2:ニューヨーク" + br + "3:ロサンゼルス");
-//		quizlists.add("私はだれ？");
-//		quizlists.add("日本で一番大きい県は？" + br + "1:岩手県" + br + "2:福島県" + br + "3:長野県");
 
 		// slackletを追加する
 		slackService.addSlacklet(new Slacklet() {
@@ -48,17 +40,14 @@ public class Example01 {
 				// メッセージがポストされたチャンネルを取得する
 				SlackChannel channel = req.getChannel();
 
-				if ("test_matsunami".equals(channel.getName())) {
-					// #test_matsunamiチャンネルだった場合
+				if ("random".equals(channel.getName())) {
+					// #randomチャンネルだった場合
 
 					// メッセージ本文を取得
 					String content = req.getContent();
 
 					//-----------------------------------------------------------クイズ出題
 					if (mode == 1) {
-//						Collections.shuffle(quizlists);
-//						String quiz = quizlists.get(0);
-//						resp.reply(quiz);
 						try {
 							PreparedStatement preparedStatement = connection.prepareStatement(sql);
 							ResultSet rs = preparedStatement.executeQuery();
@@ -89,9 +78,6 @@ public class Example01 {
 					} else if (mode == 3) {
 						if (content.equals("1") || content.equals("１")) {
 							resp.reply("続けます");
-//							Collections.shuffle(quizlists);
-//							String quiz = quizlists.get(0);
-//							resp.reply(quiz);
 							try {
 								PreparedStatement preparedStatement = connection.prepareStatement(sql);
 								ResultSet rs = preparedStatement.executeQuery();
@@ -122,13 +108,7 @@ public class Example01 {
 						else if (content.contentEquals("クイズ")) {
 							mode = 2;
 							resp.reply("クイズを始めます！");
-
-//							Collections.shuffle(quizlists);
-//							String quiz = quizlists.get(0);
-//							resp.reply(quiz);
-
-
-
+							
 							try {
 								PreparedStatement preparedStatement = connection.prepareStatement(sql);
 								ResultSet rs = preparedStatement.executeQuery();
